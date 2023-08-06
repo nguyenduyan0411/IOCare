@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="AdminKit">
+	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="/folder/logo/shortcut.jpg" />
+	<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
+	<link rel="canonical" href="https://demo-basic.adminkit.io/" />
+
+	<title>FPT Polytechnic</title>
+	
+	<base href="/">
+	<link href="/assets/admin/css/app.css" rel="stylesheet">
+
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	
+	<!-- Link AngularJs framework -->
+	<script src="/assets/admin/js/angular.min.js"></script>
+	<script src="/assets/admin/js/angular-route.js"></script>
+	
+	<!-- Quản lý -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+	<!-- Thư viện nhập xuất file excel -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.2.0/exceljs.min.js"></script>
+	
+</head>
+
+<body>
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar js-sidebar">
+			<div class="sidebar-content js-simplebar">
+				<a class="sidebar-brand" href="index.html">
+          			<span class="align-middle">FPT Polytechnic</span>
+        		</a>
+
+				<ul class="sidebar-nav" ng-controller="SidebarController">
+					<li class="sidebar-header">
+						Giao diện
+					</li>
+
+					<li class="sidebar-item" ng-class="{ active: isActive('/')}">
+						<a class="sidebar-link" href="/">
+              				<i class="align-middle" data-feather="sliders"></i>
+              				<span class="home">Trang chủ</span>
+            			</a>
+					</li>
+
+					<li class="sidebar-item" ng-class="{ active: isActive('/campaign-management')}">
+						<a class="sidebar-link" href="/campaign-management" ng-click="setActive('/campaign-management')">
+              				<i class="align-middle" data-feather="sliders"></i>
+              				<span class="align-middle">Quản lý chiến dịch</span>
+            			</a>
+					</li>
+					
+					<li class="sidebar-item" ng-class="{ active: isActive('/list-student')}">
+						<a class="sidebar-link" href="/list-student" ng-click="setActive('/list-student')">
+              				<i class="align-middle" data-feather="sliders"></i>
+              				<span class="align-middle">Danh sách sinh viên tổng</span>
+            			</a>
+					</li>
+				
+					<li class="sidebar-header">
+						Quản lý tài khoản
+					</li>
+
+					<li class="sidebar-item" ng-class="{ active: isActive('/account-management')}">
+						<a class="sidebar-link" href="/account-management" ng-click="setActive('/account-management')">
+              				<i class="align-middle" data-feather="log-in"></i>
+              				<span class="align-middle">Tạo tài khoản</span>
+            			</a>
+					</li>
+					
+					<li class="sidebar-item" ng-class="{ active: isActive('/authority-management')}">
+						<a class="sidebar-link" href="/authority-management" ng-click="setActive('/authority-management')">
+              				<i class="align-middle" data-feather="log-in"></i>
+              				<span class="align-middle">Phân quyền</span>
+            			</a>
+					</li>
+					
+					<li class="sidebar-header">
+						Quản lý dữ liệu
+					</li>
+
+					<li class="sidebar-item" ng-class="{ active: isActive('/data-management')}">
+						<a class="sidebar-link" href="/data-management" ng-click="setActive('/data-management')">
+              				<i class="align-middle" data-feather="book"></i>
+              				<span class="align-middle">Phân công công việc</span>
+            			</a>
+					</li>
+				</ul>
+			</div> <!-- End sidebar-content -->
+		</nav> <!-- End nav sidebar -->
+
+		<div class="main">
+			<!-- navbar -->
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<a class="sidebar-toggle js-sidebar-toggle">
+					<i class="hamburger align-self-center"></i>
+				</a>
+				
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav navbar-align" ng-controller="dropdownController">
+						<li class="nav-item dropdown">
+							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+								<i class="align-middle" data-feather="settings"></i>
+							</a>
+							<a   class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+								<span th:if="${#request.remoteUser}" class="text-dark" id="username"> [[${#request.remoteUser}]] </span>
+							</a>
+							<div class="dropdown-menu dropdown-menu-end">
+								<a class="dropdown-item" href="pages-profile.html"><i
+									class="align-middle me-1" data-feather="user"></i> Profile</a> <a
+									class="dropdown-item" href="#"><i class="align-middle me-1"
+									data-feather="pie-chart"></i> Analytics</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="index.html"><i
+									class="align-middle me-1" data-feather="settings"></i> Settings &
+									Privacy</a> <a class="dropdown-item" href="#"><i
+									class="align-middle me-1" data-feather="help-circle"></i> Help
+									Center</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" ng-click="logoff()">Log out</a>
+							</div></li>
+					</ul>
+				</div>
+			</nav> <!-- End navbar -->
+			<!-- Body -->
+			<main class="content">
+				<div class="container-fluid p-0">
+					<div ng-show="loading" class="pull-right label label-info">Loading...</div>
+					<ng-view></ng-view>
+				</div>
+			</main>
+
+			<!-- Footer -->
+			<footer class="footer" ng-include="'/assets/admin/layout/footer.html'"></footer>
+		</div>
+	</div>
+	
+	<script src="/assets/admin/js/app.js"></script>
+	<script src="/assets/admin/js/webapp.js"></script>
+	<script src="/assets/admin/js/sidebar.js"></script>
+	<script src="/assets/admin/js/viewmore.js"></script>
+	<script src="/assets/admin/js/semester.js"></script>
+	<script src="/assets/admin/js/campaign.js"></script>
+	<script src="/assets/admin/js/import-excel.js"></script>
+	<script src="/assets/admin/js/import-excel-list-student.js"></script>
+	<script src="/assets/admin/js/authority-ctrl.js"></script>
+	<script src="/assets/admin/js/employee.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<div class="container-fluid p-0" ng-controller="ctrl-semester">
+	<h5 class="mb-3"><strong>Bộ lọc</strong></h5>
+	<div class="row">
+		<div class="col-md-12 col-lg-12">
+			<div class="card card-primary shadow">
+				<div class="card-body row">
+					<div class="form-group col-md-4 mb-3">
+						<label>Loại chiến dịch: </label>
+						<div class="mb-3 mt-1">
+							<select class="form-select">
+				                <option></option>
+				            </select>
+			            </div>
+					</div>
+					<div class="form-group col-md-4 mb-3">
+						<label>Học kỳ</label>
+						<div class="mb-3 mt-1">
+							<select class="form-select">
+				                <option ng-repeat="x in categories" ng-value="x.categoryId">{{x.categoryId}}</option>
+				            </select>
+			            </div>
+					</div>
+					<div class="form-group col-md-4 mb-3">
+						<label>Nhân sự</label>
+						<div class="mb-3 mt-1">
+							<select class="form-select">
+				                <option ng-repeat="x in categories" ng-value="x.categoryId">{{x.categoryId}}</option>
+				            </select>
+			            </div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+		<h5 class="mb-3"><strong>Tìm kiếm</strong></h5>
+		<div class="col-md-12 col-lg-12">
+			<div class="card card-primary shadow">
+				<div class="card-body row">
+				
+					<div class="form-group col-md-4 mb-3">
+						<label>Từ ngày: </label>
+						<div class="input-group mb-3 mt-1">
+							<input ng-model="selectedCreatedDate" class="form-control" type="date" name="CreatedDate">
+						</div>
+					</div>
+					
+					<div class="form-group col-md-4 mb-3">
+						<label>Đến ngày: </label>
+						<div class="input-group mb-3 mt-1">
+							<input ng-model="selectedCreatedDate" class="form-control" type="date" name="CreatedDate">
+						</div>
+					</div>
+			
+					<div class="form-group col-md-4 mb-3">
+						<button class="btn mb-3 btn-light" style="width: 55%; margin-top: 25px">
+							 Tìm kiếm
+						</button>
+					</div>
+					
+					<div class="form-group col-md-4 mb-3">
+						<label>Mã số sinh viên: </label>
+						<div class="input-group mb-3 mt-1">
+							<input type="text" class="form-control">
+							<button class="btn btn-outline-secondary" type="button">Tìm kiếm</button>
+						</div>
+					</div>
+					<div class="form-group col-md-4 mb-3 d-flex align-items-center justify-content-center">
+						<label style="width: 100%;">Tổng danh sách: (chỉ xem) </label>
+						<input style="width: 50%" type="text" class="form-control" readonly>
+					</div>
+					
+					<div class="form-group col-md-4 mb-3">
+						<button class="btn mb-3 btn-light" style="width: 55%; margin-top: 20px" ng-click="exportToExcel()">
+							 Xuất excel
+						</button>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<h1 class="h3 mb-3"><strong>Lịch sử</strong> chăm sóc</h1>
+	<div class="row">
+					<div class="col-12 d-flex">
+						<div class="card flex-fill">
+							<table class="table table-hover my-0">
+								<thead>
+									<tr>
+										<th>Loại chiến dịch</th>
+										<th class="d-none d-md-table-cell">Học kì</th>
+										<th class="d-none d-xl-table-cell">Mã số sinh viên</th>
+										<th class="d-none d-xl-table-cell">Họ và tên</th>
+										<th>Lý do</th>
+										<th class="d-none d-md-table-cell">Người chăm sóc</th>
+										<th class="d-none d-md-table-cell">Thời gian chăm sóc</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="history in items3">
+										<td>{{ history.campaign.campaignId}}</td>
+										<td class="d-none d-xl-table-cell">{{ history.semester.semesterId }}</td>
+										<td><span class="badge bg-success">{{ history.student.studentId }}</span></td>
+										<td class="d-none d-xl-table-cell">{{ history.student.studentName }}</td>
+										<td class="d-none d-md-table-cell">{{ history.reason}}</td>
+										<td class="d-none d-md-table-cell">{{ history.employee.employeeId}}</td>
+										<td class="d-none d-md-table-cell">{{ history.takeCareTime}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
+</div>
+
+

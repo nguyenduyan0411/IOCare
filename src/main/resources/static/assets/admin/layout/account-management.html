@@ -1,0 +1,47 @@
+<div ng-controller="ctrl-employee" class="container d-flex flex-column">
+<div class="row">
+	<div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+		<div class="d-table-cell align-middle">
+
+			<div class="text-center">
+				<h1 class="h2">Đăng ký tài khoản</h1>
+			</div>
+
+			<div class="card">
+				<div class="card-body">
+					<div class="m-sm-4">
+						<form>
+							<div class="mb-3">
+								<label class="form-label">ID</label>
+								<input ng-model="form.employeeId" class="form-control form-control-lg" type="text" name="employeeId" placeholder="Nhập id" />
+							</div>
+							<div class="mb-3">
+								<label class="form-label">Mật khẩu</label>
+								<input ng-model="form.employeePassword" class="form-control form-control-lg" type="password" name="employeePassword" placeholder="Nhập mật khẩu" />
+							</div>
+
+							<div class="mb-3">
+								<label class="form-label">Họ và tên</label>
+								<input ng-model="form.employeeName" class="form-control form-control-lg" type="text" name="employeeName" placeholder="Họ tên" />
+							</div>
+							<div class="mb-3">
+								<label class="form-label">Email</label>
+								<input ng-model="form.employeeEmail" class="form-control form-control-lg" type="email" name="employeeEmail" placeholder="Vd: email@gmail.com" />
+							</div>
+							<div class="mb-3">
+								<label class="form-label">Số điện thoại</label>
+								<input ng-model="form.employeePhone" class="form-control form-control-lg" type="text" name="employeePhone" placeholder="Vd: 09..." />
+							</div>
+							<div class="text-center mt-3">
+								<!--<a href="index.html" class="btn btn-lg btn-light">Đăng ký</a> -->
+								<button ng-click="create()"  type="submit" class="btn btn-lg btn-primary">Sign up</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>

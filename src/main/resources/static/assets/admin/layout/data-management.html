@@ -1,0 +1,304 @@
+<div class="box2" ng-controller="ctrl-import">
+	
+	<div class="row">
+		<h5 class="mb-3"><strong>Bộ lọc</strong></h5>
+		<div class="col-md-12 col-lg-12">
+			<div class="card card-primary shadow">
+				<div class="card-body row">
+					<div class="form-group col-md-3 mb-3">
+						<label>Học kỳ</label>
+						<div class="mb-3 mt-1">
+							<select ng-model="form.semester.semesterId" class="form-select">
+				                <option ng-repeat="x in semesters" ng-value="x.semesterId">{{x.semesterId}}</option>
+				            </select>
+			            </div>
+					</div>
+					<div class="form-group col-md-3 mb-3">
+						<label>Loại chiến dịch: </label>
+						<div class="mb-3 mt-1">
+							<select ng-model="form.campaign.campaignId" class="form-select">
+				                <option ng-repeat="x in campaigns" ng-value="x.campaignId">{{x.campaignId}}</option>
+				            </select>
+			            </div>
+					</div>
+					<div class="form-group col-md-3 mb-3">
+						<label>Nhân sự</label>
+						<div class="mb-3 mt-1">
+							<select class="form-select">
+				                <option ng-repeat="x in categories" ng-value="x.categoryId">{{x.categoryId}}</option>
+				            </select>
+			            </div>
+					</div>
+					
+					<div class="form-group col-md-3 mb-3">
+						<label>Chuyên ngành</label>
+						<div class="mb-3 mt-1">
+							<select class="form-select">
+				                <option ng-repeat="x in categories" ng-value="x.categoryId">{{x.categoryId}}</option>
+				            </select>
+			            </div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+		<h5 class="mb-3"><strong>Tìm kiếm</strong></h5>
+		<div class="col-md-12 col-lg-12">
+			<div class="card card-primary shadow">
+				<div class="card-body row">
+				
+					<div class="form-group col-md-5 mb-3">
+						<label>Từ ngày: </label>
+						<div class="input-group mb-3 mt-1">
+							<input ng-model="selectedCreatedDate" class="form-control" type="date" name="CreatedDate">
+						</div>
+					</div>
+					
+					<div class="form-group col-md-5 mb-3">
+						<label>Đến ngày: </label>
+						<div class="input-group mb-3 mt-1">
+							<input ng-model="selectedCreatedDate" class="form-control" type="date" name="CreatedDate">
+						</div>
+					</div>
+			
+					<div class="form-group col-md-2 mb-3">
+						<button class="btn mb-3 btn-light" style="width: 100%; margin-top: 25px">
+							 Tìm
+						</button>
+					</div>
+					
+					
+					<div class="form-group col-md-4 mb-3 d-flex align-items-center justify-content-center">
+						<label style="width: 90%;">Đã chăm sóc: (chỉ xem) </label>
+						<input style="width: 50%" type="text" class="form-control" readonly>
+					</div>
+					
+					<div class="form-group col-md-4 mb-3 d-flex align-items-center justify-content-center">
+						<label style="width: 90%;">Chưa chăm sóc: (chỉ xem) </label>
+						<input style="width: 50%" type="text" class="form-control" readonly>
+					</div>
+					
+					
+					
+					<div class="form-group col-md-4 mb-3 d-flex align-items-center justify-content-center">
+						<label style="width: 90%;">Tổng danh sách: (chỉ xem) </label>
+						<input style="width: 50%" type="text" class="form-control" readonly>
+					</div>
+					
+					<div class="form-group col-md-4 mb-3">
+						<div class="input-group mb-3 mt-3">
+							<input type="text" class="form-control" placeHolder="Nhập mã số sinh viên">
+							<button class="btn btn-outline-secondary" type="button">Tìm kiếm</button>
+						</div>
+					</div>
+					
+
+				</div>
+
+			</div>
+		</div>
+		
+		<h5 class="mb-3"><strong>Phân công</strong> & Nhập xuất file excel</h5>
+		<div class="col-md-12 col-lg-12">
+			<div class="card card-primary shadow">
+				<div class="card-body row">
+					<div class="form-group col-md-3 mb-4">
+					
+						<label class="form-label">Học kỳ: </label>
+						<div class="mb-3">
+								<select ng-model="form.semester.semesterId" class="form-select">
+				                <option ng-repeat="x in semesters" ng-value="x.semesterId">{{x.semesterId}}</option>
+				            </select>
+			            </div>
+				
+					</div>
+					<div class="form-group col-md-3 mb-4">				
+						<div class="mb-3">
+						  <label for="formFileDisabled" class="form-label">Loại chiến dịch: </label>
+						  <select ng-model="form.campaign.campaignId" class="form-select">
+				                <option ng-repeat="x in campaigns" ng-value="x.campaignId">{{x.campaignId}}</option>
+				            </select>
+						</div>		
+					</div>
+					
+					<div class="form-group col-md-4">					
+						<div class="mb-3">
+						  <label for="formFileDisabled" class="form-label">Nhập file excel</label>
+						  <input ng-model="form.file" class="form-control" type="file" id="file-excel" onchange="angular.element(this).scope().import(this.files)" ng-disabled="!form.semester.semesterId || !form.campaign.campaignId">
+						</div>		
+					</div>	
+					
+					<div class="form-group col-md-2 mb-4">
+						<label for="title">Hành động</label>
+						<div class="custom-file mb-4 pt-2">
+							<button ng-click="create()" class="btn mb-3 btn-light">Lưu</button>	
+						</div>	
+					</div>
+					
+				</div>	
+				
+				<table id="myTable" class="table table-hover my-0">
+					<thead>
+						<tr>
+							<th class="d-none d-md-table-cell">Tên thư mục</th>
+							<th class="d-none d-xl-table-cell">Mã học kỳ</th>
+							<th>Mã chiến dịch</th>
+
+							<th class="d-none d-md-table-cell">Ngày nhập file</th>
+							<th class="d-none d-md-table-cell">Mã nhân sự</th>
+							<th class="d-none d-md-table-cell">Tuỳ chọn</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="imp in items">
+					        <td>{{imp.importedFileName}}</td>
+					        <td class="d-none d-xl-table-cell">{{imp.semester.semesterId}}</td>
+					        <td><span class="badge bg-success">{{imp.campaign.campaignId}}</span></td>
+					        <td class="d-none d-md-table-cell">{{imp.importedDate}}</td>
+					        <td class="d-none d-md-table-cell">{{imp.employee.employeeId}}</td>
+					        <td class="d-none d-md-table-cell"><button class="btn mb-3 btn-light" style="width: 100%; margin-top: 25px" >Chỉnh sửa</button></td>
+					     </tr>
+						
+					</tbody>
+				</table>			
+			</div>
+		</div>
+	</div>
+	
+	<hr>
+	<div class="form-group col-md-3 mb-4">					
+	<label class="form-label">Tên thư mục:</label>
+	<div class="mb-3">
+		<select ng-model="selectedFileName" ng-change="showStudents()" class="form-select">
+			<option ng-repeat="x in fileExcelNames" ng-value="x.importedFileName">{{x.importedFileName}}</option>
+		</select>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-6 mb-3">
+		<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+			<li class="nav-item" role="presentation">
+				<button class="btn btn-light active" id="pills-home-tab" data-bs-toggle="pill"
+					data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+					aria-selected="true">Đã phân công</button>
+			</li>
+			<li class="nav-item" role="presentation">
+				<button class="btn btn-light" id="pills-profile-tab" data-bs-toggle="pill"
+					data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
+					aria-selected="false">Chưa phân công</button>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="col-md-6 mb-3" style="display: flex; justify-content: flex-end;">
+			<!-- Thêm nút "Phân công" -->
+		<button class="btn btn-outline-secondary"ng-click="assignStudents()" ng-disabled="!form.employees || !form.employees.employeeId || !hasSelectedStudents()">Phân công</button>	
+		<button class="btn btn-outline-secondary" style="margin-left: 10px;" ng-click="deleteSelectedStudents()" ng-disabled="selectedStudentsAssigned.length === 0">Xóa Phân Công</button>
+	</div>
+</div>
+
+<div class="tab-content" id="pills-tabContent">
+	<div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+		aria-labelledby="pills-home-tab" tabindex="0" ng-controller="viewmore">
+		<div class="card flex-fill">		
+			<table id="myTable" class="table table-hover my-0">
+				<thead>
+					<tr>
+						<th><input type="checkbox" ng-model="selectAllAssigned" ng-change="toggleSelectAllAssigned()"></th>
+						<th>Mã sinh viên</th>
+						<th class="d-none d-xl-table-cell">Mã học kỳ</th>
+						<th>Mã môn học</th>
+						<th class="d-none d-md-table-cell">Tổng học phí</th>
+						<th class="d-none d-md-table-cell">Chuyên ngành</th>
+						<th class="d-none d-md-table-cell">Mã nhân sự</th>
+						<th class="d-none d-md-table-cell">Thời gian chăm sóc</th>
+						<th class="d-none d-md-table-cell">Nguyện vọng</th>
+						<th class="d-none d-md-table-cell">Phân loại đối tượng</th>
+						<th class="d-none d-md-table-cell">Phân loại rủi ro</th>
+						<th class="d-none d-md-table-cell">Mô tả chi tiết</th>
+						<th class="d-none d-md-table-cell">Tên file excel</th>
+						<th class="d-none d-md-table-cell text-center">Thao tác</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="student in tableDataAssigned">
+						<td><input type="checkbox" ng-model="student.selectedAssigned" ng-change="updateSelectedStudentsAssigned(student)"  ng-checked="selectAllAssigned"></td>
+						<td>{{ student.studentId }}</td>
+						<td class="d-none d-xl-table-cell">{{ student.semester.semesterId }}</td>
+						<td><span class="badge bg-success">{{ student.subjectId }}</span></td>
+						<td class="d-none d-md-table-cell">{{ student.totalFee }}</td>
+						<td class="d-none d-md-table-cell">{{ student.campaign.campaignId }}</td>
+						<td class="d-none d-md-table-cell">{{ student.employee.employeeId }}</td>
+						<td class="d-none d-md-table-cell">{{ student.thoiGianChamSoc }}</td>
+						<td class="d-none d-md-table-cell">{{ student.nguyenVong }}</td>
+						<td class="d-none d-md-table-cell">{{ student.phanLoaiDoiTuong }}</td>
+						<td class="d-none d-md-table-cell">{{ student.phanLoaiRuiRo }}</td>
+						<td class="d-none d-md-table-cell">{{ student.moTaChiTiet }}</td>
+						<td class="d-none d-md-table-cell">{{ student.imported.importedFileName }}</td>
+						<td class="d-none d-md-table-cell" style="width: 220px;">
+							<button class="btn mb-3 btn-light" style="width: 40%; margin-top: 25px; margin-right:5px; float: left;" ng-click="editStudent(student)">Edit</button>
+							<button class="btn btn-light" style="width: 40%; margin-top: 25px" ng-click="deleteStudent(student)">Delete</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<button class="btn btn-light">Xem thêm</button>
+		</div>
+	</div>
+
+		<div class="tab-pane fade" id="pills-profile" role="tabpanel"
+			aria-labelledby="pills-profile-tab" tabindex="0">
+			<div class="card flex-fill" ng-controller="viewmore">
+				<table id="myTable" class="table table-hover my-0">
+					<thead>
+						<tr>
+							<th><input type="checkbox" ng-model="selectAll"
+								ng-change="toggleSelectAll()"></th>
+							<th>Mã sinh viên</th>
+							<th class="d-none d-xl-table-cell">Mã học kỳ</th>
+							<th>Mã môn học</th>
+							<th class="d-none d-md-table-cell">Tổng học phí</th>
+							<th class="d-none d-md-table-cell">Mã nhân sự</th>
+							<th class="d-none d-md-table-cell">Tên file excel</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="student in tableData">
+							<td><input type="checkbox" ng-model="student.selected"
+								ng-change="updateSelectedStudents(student)"
+								ng-checked="selectAll"></td>
+							<td ng-model="form.student.studentId">{{ student.studentId
+								}}</td>
+							<td ng-model="form.student.semester.semesterId"
+								class="d-none d-xl-table-cell">{{
+								student.semester.semesterId }}</td>
+							<td ng-model="form.student.subjectId"><span
+								class="badge bg-success">{{ student.subjectId }}</span></td>
+							<td ng-model="form.student.totalFee"
+								class="d-none d-md-table-cell">{{ student.totalFee }}</td>
+							<td class="d-none d-md-table-cell"><select
+								ng-model="form.employees.employeeId" 
+								class="form-select" ng-show="selectAll || student.selected" >
+									<option ng-repeat="x in employees" value="{{x}}">{{
+										x.employeeId }}</option>
+							</select></td>
+
+							<td ng-model="form.student.imported.importedFileName"
+								class="d-none d-md-table-cell">{{
+								student.imported.importedFileName }}</td>
+						</tr>			
+					</tbody>
+				</table>
+				<button class="btn btn-light">Xem thêm</button>
+			</div>
+		</div>
+	</div>
+
+</div>
+</div>
+</div>
+
+
+

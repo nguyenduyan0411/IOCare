@@ -1,0 +1,67 @@
+<div class="container-fluid p-0" ng-controller="ctrl-import-list-student">
+	<div class="row">
+		<h5 class="mb-3"><strong>Nhập</strong> file excel</h5>
+		<div class="col-md-12 col-lg-12">
+			<div class="card card-primary shadow">
+				<div class="card-body row">
+					<div class="form-group col-md-4">					
+						<div class="mb-3">
+						  <label class="form-label">Nhập file excel</label>
+						  <input ng-model="form.file" class="form-control" type="file" id="file-excel" onchange="angular.element(this).scope().import(this.files)">
+						</div>		
+					</div>	
+					<div class="form-group col-md-2 mb-4">
+						<label for="title">Hành động</label>
+						<div class="custom-file mb-4 pt-2">
+							<button ng-click="create()" class="btn mb-3 btn-light">Lưu</button>	
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<h1 class="h3 mb-3"><strong>Danh sách</strong> sinh viên tổng</h1>
+	<div class="row" >
+		<div class="col-12 d-flex">
+			<div class="card flex-fill">
+				<table id="myTable" class="table table-hover my-0">
+					<thead>
+						<tr>
+							<th>Mã sinh viên</th>
+							<th class="d-none d-xl-table-cell">Họ và tên</th>
+							<th>Khối / trườn</th>
+							<th class="d-none d-md-table-cell">Khóa nhập học gần nhất</th>
+							<th class="d-none d-md-table-cell">Khóa nhập học ban đầu</th>
+							<th class="d-none d-md-table-cell">Trạng thái sinh viên</th>
+							<th class="d-none d-md-table-cell">Kỳ học hiện tại</th>
+							<th class="d-none d-md-table-cell">Ngành học</th>
+							<th class="d-none d-md-table-cell">Chuyên ngành</th>
+							<th class="d-none d-md-table-cell">Mã chuyên ngành</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="index in items | limitTo: visibleItems">
+					        <td>{{ index.studentId }}</td>
+					        <td class="d-none d-xl-table-cell">{{ index.fullname }}</td>
+					        <td><span class="badge bg-success">{{ index.block }}</span></td>
+					        <td class="d-none d-md-table-cell">{{ index.nearestCourse }}</td>
+					        <td class="d-none d-md-table-cell">{{ index.initialAdmissionCourse }}</td>
+					        <td class="d-none d-md-table-cell">{{ index.statusCode }}</td>
+					        <td class="d-none d-md-table-cell">{{ index.currentSemester }}</td>
+					        <td class="d-none d-md-table-cell">{{ index.fieldOfStudy }}</td>
+					        <td class="d-none d-md-table-cell">{{ index.major }}</td>
+					        <td class="d-none d-md-table-cell">{{ index.majorId }}</td>
+					     </tr>
+						
+					</tbody>
+				</table>
+				<button class="btn btn-light" ng-show="visibleItems < items.length" ng-click="showMore()">Xem thêm</button>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+
